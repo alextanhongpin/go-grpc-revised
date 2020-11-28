@@ -6,6 +6,7 @@ proto:
 
 
 init:
+	@# brew install protobuf
 	@brew upgrade protobuf
 	@go get -u google.golang.org/grpc
 	@go get -u github.com/golang/protobuf/protoc-gen-go
@@ -18,3 +19,10 @@ server:
 
 client:
 	@go run client/main.go
+
+is_valid_protoc_version:
+ifneq ($(shell protoc --version),libprotoc 3.14.0)
+	$(error Expected version libprotoc 3.14.0, got $(shell protoc --version))
+endif
+
+check_protoc_version: is_valid_protoc_version
