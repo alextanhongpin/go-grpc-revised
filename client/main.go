@@ -5,7 +5,7 @@ import (
 	"log"
 	"time"
 
-	pb "github.com/alextanhongpin/grpc-test/proto"
+	pb "github.com/alextanhongpin/go-grpc-revised/proto"
 	"google.golang.org/grpc"
 )
 
@@ -15,7 +15,7 @@ const (
 )
 
 func main() {
-	conn, err := grpc.Dial(address, grpc.WithInsecure())
+	conn, err := grpc.Dial(address, grpc.WithInsecure(), grpc.WithBlock())
 	if err != nil {
 		log.Fatalf("did not connect: %v", err)
 	}
@@ -30,5 +30,5 @@ func main() {
 	if err != nil {
 		log.Fatalf("could not greet: %v", err)
 	}
-	log.Printf("Greeting: %s", r.Message)
+	log.Printf("Greeting: %s", r.GetMessage())
 }

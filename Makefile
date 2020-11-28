@@ -2,14 +2,15 @@
 
 PROTO_PATH=proto
 proto:
-	@find ${PROTO_PATH}/*.protoc -exec protoc -I ${PROTO_PATH} {} --go_out=plugins=grpc:${PROTO_PATH} \;
+	@protoc --proto_path=${PROTO_PATH} --go_out=${PROTO_PATH} --go_opt=paths=source_relative --go-grpc_out=${PROTO_PATH} --go-grpc_opt=paths=source_relative ${PROTO_PATH}/*.proto
 
 
-install:
-	@brew install protobuf
+init:
 	@brew upgrade protobuf
 	@go get -u google.golang.org/grpc
 	@go get -u github.com/golang/protobuf/protoc-gen-go
+	@go install google.golang.org/protobuf/cmd/protoc-gen-go
+	@go install google.golang.org/grpc/cmd/protoc-gen-go-grpc
 
 
 server:

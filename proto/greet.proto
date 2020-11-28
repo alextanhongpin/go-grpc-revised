@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+// Specify the full import path of the Go package that contains the generated code.
+option go_package = "github.com/alextanhongpin/go-grpc-revised/proto";
+
+package greet;
+
+service Greeter {
+	rpc SayHello (HelloRequest) returns (HelloReply) {}
+}
+
+message HelloRequest {
+	string name = 1;
+}
+
+message HelloReply {
+	string message = 1;
+}

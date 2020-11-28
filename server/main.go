@@ -5,7 +5,7 @@ import (
 	"log"
 	"net"
 
-	pb "github.com/alextanhongpin/grpc-test/proto"
+	pb "github.com/alextanhongpin/go-grpc-revised/proto"
 	"google.golang.org/grpc"
 )
 
@@ -14,12 +14,13 @@ const (
 )
 
 type server struct {
+	pb.UnimplementedGreeterServer
 }
 
-func (s *server) SayHello(ctx context.Context, req *pb.HelloRequest) (*pb.HelloResponse, error) {
-	log.Printf("Received: %v", req.Name)
-	return &pb.HelloResponse{
-		Message: "Hello " + req.Name,
+func (s *server) SayHello(ctx context.Context, in *pb.HelloRequest) (*pb.HelloReply, error) {
+	log.Printf("Received: %v", in.GetName())
+	return &pb.HelloReply{
+		Message: "Hello " + in.GetName(),
 	}, nil
 }
 
