@@ -23,3 +23,8 @@ $ make server
 # Start the gRPC client that calls the server.
 $ make client
 ```
+
+
+## Alternative error handling
+
+https://www.sobyte.net/post/2022-11/go-grpc-error/
